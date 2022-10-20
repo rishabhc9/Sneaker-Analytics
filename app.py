@@ -17,7 +17,7 @@ st.set_page_config(
 def main_page():
     global df
     st.title('Sneaker Sales')
-    original_data = pd.read_csv('/Users/rishabhchopda/Downloads/DA Project/StockX-Data-Contest-2019-3.csv')
+    original_data = pd.read_csv('/Users/rishabhchopda/Downloads/Sneaker Analytics/StockX-Data-Contest-2019-3.csv')
     df = original_data.copy()
 
     df['Order Date'] = pd.to_datetime(df['Order Date'])
@@ -54,10 +54,9 @@ def main_page():
         plt.rc('axes',edgecolor=COLOR)
         st.pyplot(fig)
 
-def page2():
-    original_data = pd.read_csv('/Users/rishabhchopda/Downloads/DA Project/StockX-Data-Contest-2019-3.csv')
+    original_data = pd.read_csv('/Users/rishabhchopda/Downloads/Sneaker Analytics/StockX-Data-Contest-2019-3.csv')
     df = original_data.copy()
-    st .title('Sneaker Name vs Sale Price')
+    #st .title('Sneaker Name vs Sale Price')
     temp = df[['Sneaker Name', 'Sale Price']]
 
     # Clean up this list
@@ -119,7 +118,10 @@ def page2():
     # Crerating visual of average shoe price
     fig_dims = (15, 4)
     fig, ax = plt.subplots(figsize=fig_dims)
+    
+
     chart = sns.barplot(x = avgprice_df['Sneaker_Name'] , y= avgprice_df['Average_Price'])
+    chart.set_title("Sneaker Name vs Sale Price")
     chart.set_xticklabels(chart.get_xticklabels(), rotation = 90)
     plt.gca().xaxis.set_major_locator(plt.MultipleLocator(1))
 
@@ -183,11 +185,11 @@ def page2():
     col1.metric("Yeezy average price ($)", str(avgs_2[0]))
     col2.metric("Off-White average price ", str(avgs_2[1]))
 
-def page3():
+def page2():
     with suppress(Exception):
         st.title('Sneaker Resale Price Prediction')
-        model = pickle.load(open("/Users/rishabhchopda/Downloads/DA Project/model.pkl", "rb"))
-        shoe_data = pd.read_csv("/Users/rishabhchopda/Downloads/DA Project/StockX-Data-Contest-2019-3.csv",parse_dates=True,)
+        model = pickle.load(open("/Users/rishabhchopda/Downloads/Sneaker Analytics/model.pkl", "rb"))
+        shoe_data = pd.read_csv("/Users/rishabhchopda/Downloads/Sneaker Analytics/StockX-Data-Contest-2019-3.csv",parse_dates=True,)
         df = shoe_data.copy()
         df = df.drop(["Sale Price"], axis="columns")
         df = df.rename(
@@ -303,8 +305,7 @@ def page3():
 
 page_names_to_funcs = {
 "Sneaker Sales": main_page,
-"Sneaker Name vs Sale Price": page2,
-"Sneaker Resale Price Prediction": page3,
+"Sneaker Resale Price Prediction": page2,
 }
 
 selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
