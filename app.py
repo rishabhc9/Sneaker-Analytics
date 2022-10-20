@@ -16,7 +16,7 @@ st.set_page_config(
 
 def main_page():
     global df
-    st.title('Sneakers Sales by Release Date')
+    st.title('Sneaker Sales')
     original_data = pd.read_csv('/Users/rishabhchopda/Downloads/DA Project/StockX-Data-Contest-2019-3.csv')
     df = original_data.copy()
 
@@ -302,7 +302,7 @@ def page3():
 
 
 page_names_to_funcs = {
-"Sneakers Sales by Release Date": main_page,
+"Sneaker Sales": main_page,
 "Sneaker Name vs Sale Price": page2,
 "Sneaker Resale Price Prediction": page3,
 }
